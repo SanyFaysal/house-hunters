@@ -5,6 +5,8 @@ import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import App from '../App';
 import Home from '../pages/Home';
+import Dashboard from '../layouts/Dashboard';
+import PostedHouse from '../components/OwnerDashboardComponent/PostedHouse';
 
 const routes = createBrowserRouter([
   {
@@ -14,6 +16,24 @@ const routes = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />,
+    children: [
+      {
+        index: true,
+        element: <PostedHouse />,
+      },
+      {
+        path: 'createHouse',
+        element: <PostedHouse />,
+      },
+      {
+        index: true,
+        element: <PostedHouse />,
       },
     ],
   },

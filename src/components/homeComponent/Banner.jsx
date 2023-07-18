@@ -4,7 +4,7 @@ const Banner = () => {
     elem.push(index);
   }
   return (
-    <div className="text-center   mx-12 mt-[-20px]">
+    <div className="text-center   mx-12 mt-[-10px]">
       <h3 className="text-3xl  my-5 ">Welcome To</h3>
       <h1 className="text-5xl  font-bold opacity-75 mt-[-20px] ">
         House Hunters
