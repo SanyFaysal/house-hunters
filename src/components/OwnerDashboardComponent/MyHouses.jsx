@@ -7,7 +7,6 @@ const MyHouses = () => {
     <div className="overflow-x-auto bg-white  my-2 rounded-lg">
       <div className="flex justify-between p-5">
         <div className="flex gap-4">
-          <label htmlFor="">Total :120 </label>
           <div>
             <label htmlFor="">Per page : </label>
             <select name="" id="" className="border rounded-lg px-2 ml-2">

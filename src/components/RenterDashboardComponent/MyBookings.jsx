@@ -7,9 +7,11 @@ import BookingCard from './BookingCard';
 const MyBookings = () => {
   return (
     <div className="bg-white p-5  rounded-lg my-2">
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center mb-4">
         <h1 className=" font-semibold">All of Bookings </h1>
-        <h1 className=" font-semibold">Total : 02 </h1>
+        <button className=" px-3 py-1 bg-orange-50 rounded-lg text-orange-400">
+          Free up space
+        </button>
       </div>
       <BookingCard />
       <BookingCard />

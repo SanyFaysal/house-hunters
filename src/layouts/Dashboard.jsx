@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import logo from '../assets/logo.png';
 import DashSideNav from '../components/DashboardComponent/DashboardSideNav';
@@ -6,6 +6,7 @@ import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
 
 import DashboardHeader from '../components/DashboardComponent/DashboardHeader';
 const Dashboard = () => {
+  const navigate = useNavigate();
   return (
     <div className="grid grid-cols-6 gap-5  ">
       <div className="col-span-1   h-[100vh] bg-white px-4 sticky top-0">
@@ -14,6 +15,7 @@ const Dashboard = () => {
           <img
             src={logo}
             alt=""
+            onClick={() => navigate('/')}
             className="  w-50 h-32 my-[-15px] my-5 mx-auto rounded"
           />
           <DashSideNav />

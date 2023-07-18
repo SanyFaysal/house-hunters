@@ -1,6 +1,7 @@
 import house from '../../assets/house.jpg';
 import { RxCross1 } from 'react-icons/rx';
 import BookingModal from '../modal/BookingModal';
+import { Link } from 'react-router-dom';
 
 const HouseCard = () => {
   return (
@@ -30,7 +31,7 @@ const HouseCard = () => {
 
             <div>
               <h5 className="text-sm font-light">Rent per month </h5>
-              <p className="  font-semibold text-orange-400">12000 TK</p>
+              <p className="  font-semibold ">12000 TK</p>
             </div>
           </div>
           <hr className="my-2" />
@@ -51,9 +52,12 @@ const HouseCard = () => {
               <p className=" text-sm font-semibold">26 July, 2023</p>
             </div>
             <div className=" flex gap-2">
-              <button className=" text-sm bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded">
+              <Link
+                to="/house/jfkdjkf"
+                className=" my-auto py-3 px-2 text-sm bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded"
+              >
                 Details
-              </button>
+              </Link>
 
               <label
                 htmlFor="my_modal_6"

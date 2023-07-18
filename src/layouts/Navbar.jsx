@@ -1,13 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 export default function Navbar() {
+  const navigate = useNavigate();
   return (
-    <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
+    <nav className="w-full h-16 fixed top backdrop-blur-lg z-10 ">
       <div className="h-full w-full ">
         <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-auto ">
           <div>
-            <img className="w-32 " src={logo} alt="log" />
+            <img
+              onClick={() => navigate('/')}
+              className="w-32 "
+              src={logo}
+              alt="log"
+            />
           </div>
           <div>
             <ul className="flex items-center gap-5 my-1 font-medium">
