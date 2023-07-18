@@ -7,6 +7,7 @@ import App from '../App';
 import Home from '../pages/Home';
 import Dashboard from '../layouts/Dashboard';
 import PostedHouse from '../components/OwnerDashboardComponent/PostedHouse';
+import AddNewHouse from '../components/OwnerDashboardComponent/AddNewHouse';
 
 const routes = createBrowserRouter([
   {
@@ -28,8 +29,8 @@ const routes = createBrowserRouter([
         element: <PostedHouse />,
       },
       {
-        path: 'createHouse',
-        element: <PostedHouse />,
+        path: 'addHouse',
+        element: <AddNewHouse />,
       },
       {
         index: true,
