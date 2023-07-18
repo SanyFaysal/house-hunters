@@ -1,3 +1,5 @@
+import PaginationPart from '../shared/PaginationPart';
+
 import HouseCard from './HouseCard';
 import SearchSideBar from './SearchSideBar';
 
@@ -16,6 +18,9 @@ const HouseSearch = () => {
             <HouseCard />
             <HouseCard />
             <HouseCard />
+            <div className="my-6 mx-auto">
+              <PaginationPart />
+            </div>
           </div>
         </div>
       </div>
