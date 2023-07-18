@@ -16,6 +16,12 @@ const DashSideNav = () => {
       >
         Add New House
       </Link>
+      <Link
+        to="/dashboard/myBookings"
+        className="px-3 py-2 block rounded bg-gray-100 text-gray-800 text-semibold my-2"
+      >
+        My Bookings
+      </Link>
     </div>
   );
 };

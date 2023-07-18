@@ -10,6 +10,7 @@ import Dashboard from '../layouts/Dashboard';
 import AddNewHouse from '../components/OwnerDashboardComponent/AddNewHouse';
 import MyHouses from '../components/OwnerDashboardComponent/MyHouses';
 import EditHouse from '../components/OwnerDashboardComponent/EditHouse';
+import MyBookings from '../components/RenterDashboardComponent/MyBookings';
 
 const routes = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const routes = createBrowserRouter([
       {
         path: 'editHouse',
         element: <EditHouse />,
+      },
+      {
+        path: 'myBookings',
+        element: <MyBookings />,
       },
     ],
   },

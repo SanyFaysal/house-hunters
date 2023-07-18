@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import PaginationPart from '../shared/PaginationPart';
 import MyHouseTableRow from './MyHouseTableRow';
 
@@ -5,16 +6,24 @@ const MyHouses = () => {
   return (
     <div className="overflow-x-auto bg-white  my-2 rounded-lg">
       <div className="flex justify-between p-5">
-        <div>
+        <div className="flex gap-4">
           <label htmlFor="">Total :120 </label>
+          <div>
+            <label htmlFor="">Per page : </label>
+            <select name="" id="" className="border rounded-lg px-2 ml-2">
+              <option value="">5 </option>
+              <option value="">10 </option>
+              <option value="">15 </option>
+            </select>
+          </div>
         </div>
         <div>
-          <label htmlFor="">Per page : </label>
-          <select name="" id="" className="border rounded-lg px-2 ml-2">
-            <option value="">5 </option>
-            <option value="">10 </option>
-            <option value="">15 </option>
-          </select>
+          <Link
+            to="/dashboard/addHouse"
+            className="px-3 py-2 bg-blue-50 text-blue-500 rounded-lg"
+          >
+            Add New House
+          </Link>
         </div>
       </div>
       <hr />
