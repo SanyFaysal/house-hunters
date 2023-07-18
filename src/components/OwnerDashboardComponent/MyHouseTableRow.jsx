@@ -1,7 +1,9 @@
 import { FiEdit2, FiEye, FiTrash2 } from 'react-icons/fi';
 import { RxCross1 } from 'react-icons/rx';
 import houseImg from '../../assets/house.jpg';
+import { useNavigate } from 'react-router-dom';
 const MyHouseTableRow = () => {
+  const navigate = useNavigate();
   return (
     <tr>
       <td>
@@ -29,7 +31,10 @@ const MyHouseTableRow = () => {
       <td>
         <div className="flex gap-4  items-center">
           <FiEdit2 className="text-xl hover:text-blue-500" />
-          <FiEye className="text-xl hover:text-blue-500" />
+          <FiEye
+            onClick={() => navigate('/house/jfjdk')}
+            className="text-xl hover:text-blue-500"
+          />
           <FiTrash2 className="text-xl hover:text-red-400" />
         </div>
       </td>

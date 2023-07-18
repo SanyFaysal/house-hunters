@@ -3,14 +3,16 @@ import houseBanner from '../assets/house-banner.jpg';
 export default function HouseDetails() {
   return (
     <div className="grid grid-cols-4 gap-10 px-16 pb-20 ">
-      <div className="col-span-3 flex-col gap-y-10 max-w-7xl mx-auto items-center">
+      <div className="col-span-3 flex-col gap-y-10 max-w-7xl mx-auto items-center ">
         <div className=" flex justify-center mb-5">
           <img src={houseBanner} alt="" className="h-60" />
         </div>
+
         <div className="mb-5">
           <label htmlFor="font-semibold">Rent</label>
           <h1 className="text-2xl font-semibold">1,25,000 Tk</h1>
         </div>
+
         <div className="mb-5 ">
           <label htmlFor="font-semibold">House Name</label>
           <h1 className="text-xl ">Amader Sopno Vhila</h1>
@@ -28,8 +30,8 @@ export default function HouseDetails() {
             consectetur facere nulla, nam ut?
           </h1>
         </div>
-        <div className="flex justify-center my-5">
-          <button className=" px-3 py-2 rounded-lg bg-white text-black">
+        <div className="flex justify-start my-5">
+          <button className=" px-4 py-2 text-lg rounded-lg bg-white text-blue-500 ">
             Book house
           </button>
         </div>
