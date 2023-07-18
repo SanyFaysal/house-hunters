@@ -6,8 +6,10 @@ import NotFound from '../pages/NotFound';
 import App from '../App';
 import Home from '../pages/Home';
 import Dashboard from '../layouts/Dashboard';
-import PostedHouse from '../components/OwnerDashboardComponent/PostedHouse';
+
 import AddNewHouse from '../components/OwnerDashboardComponent/AddNewHouse';
+import MyHouses from '../components/OwnerDashboardComponent/MyHouses';
+import EditHouse from '../components/OwnerDashboardComponent/EditHouse';
 
 const routes = createBrowserRouter([
   {
@@ -26,15 +28,19 @@ const routes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <PostedHouse />,
+        element: <MyHouses />,
+      },
+      {
+        path: 'myHouses',
+        element: <MyHouses />,
       },
       {
         path: 'addHouse',
         element: <AddNewHouse />,
       },
       {
-        index: true,
-        element: <PostedHouse />,
+        path: 'editHouse',
+        element: <EditHouse />,
       },
     ],
   },

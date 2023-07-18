@@ -1,9 +1,6 @@
-// import { Link } from 'react-router-dom';
-
 import { useState } from 'react';
-// import { toast } from 'react-hot-toast';
 
-const AddNewHouse = () => {
+const EditHouse = () => {
   const initialPhoneNumber = '+8801';
   const [phoneNumber, setPhoneNumber] = useState(initialPhoneNumber);
   const handlePhoneNumber = (e) => {
@@ -13,7 +10,6 @@ const AddNewHouse = () => {
       setPhoneNumber(newValue);
     }
   };
-
   return (
     <div className="bg-white p-5  rounded-lg my-2">
       <h1 className="text-xl font-semibold">Add a New House </h1>
@@ -151,4 +147,4 @@ const AddNewHouse = () => {
   );
 };
 
-export default AddNewHouse;
+export default EditHouse;

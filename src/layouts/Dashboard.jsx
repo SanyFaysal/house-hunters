@@ -1,14 +1,15 @@
 import { Link, Outlet } from 'react-router-dom';
 
 import logo from '../assets/logo.png';
-import DashSideNav from './DashSideNav';
+import DashSideNav from '../components/DashboardComponent/DashboardSideNav';
 import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
-import { BsPersonCircle } from 'react-icons/bs';
+
+import DashboardHeader from '../components/DashboardComponent/DashboardHeader';
 const Dashboard = () => {
   return (
     <div className="grid grid-cols-6 gap-5  ">
-      <div className="col-span-1   h-[100vh] bg-white px-4">
-        <div className="h-[65vh] sticky top-0">
+      <div className="col-span-1   h-[100vh] bg-white px-4 sticky top-0">
+        <div className="h-[65vh] ">
           {' '}
           <img
             src={logo}
@@ -27,9 +28,7 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="col-span-5 pr-4">
-        <div className="h-20 bg-white">
-          <BsPersonCircle />
-        </div>
+        <DashboardHeader />
         <Outlet />
       </div>
     </div>

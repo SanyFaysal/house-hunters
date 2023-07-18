@@ -4,7 +4,7 @@ const DashSideNav = () => {
   return (
     <div>
       <Link
-        to="/myHouses"
+        to="/dashboard/myHouses"
         className="px-3 block py-2 rounded bg-gray-100 text-gray-800 text-semibold my-2"
       >
         My Houses
