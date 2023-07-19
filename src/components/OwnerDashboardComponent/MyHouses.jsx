@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import PaginationPart from '../shared/PaginationPart';
 import MyHouseTableRow from './MyHouseTableRow';
+import { useGetHousesQuery } from '../../redux/house/houseApi';
 
 const MyHouses = () => {
+  const { data } = useGetHousesQuery();
   return (
     <div className="overflow-x-auto bg-white  my-2 rounded-lg">
       <div className="flex justify-between p-5">
@@ -31,7 +33,7 @@ const MyHouses = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>City</th>
+            <th>Contact</th>
             <th>Bedrooms</th>
             <th>Bathrooms</th>
             <th>Room size</th>
@@ -40,13 +42,9 @@ const MyHouses = () => {
           </tr>
         </thead>
         <tbody>
-          <MyHouseTableRow />
-          <MyHouseTableRow />
-          <MyHouseTableRow />
-          <MyHouseTableRow />
-          <MyHouseTableRow />
-          <MyHouseTableRow />
-          <MyHouseTableRow />
+          {data?.data?.map((house) => (
+            <MyHouseTableRow key={house?._id} house={house} />
+          ))}
         </tbody>
       </table>
 

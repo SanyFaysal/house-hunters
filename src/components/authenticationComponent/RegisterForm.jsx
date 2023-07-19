@@ -1,15 +1,44 @@
 import { Link } from 'react-router-dom';
+import { useRegisterMutation } from '../../redux/user/userApi';
+import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
 const RegisterForm = () => {
+  const [register, { data, isSuccess, isError, isLoading, error }] =
+    useRegisterMutation();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const fullName = e.target.fullName.value;
+    const phoneNumber = e.target.phoneNumber.value;
+    const email = e.target.email.value;
+    const role = e.target.role.value;
+    const password = e.target.password.value;
+    const userData = { fullName, phoneNumber, email, role, password };
+    register(userData);
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading('Loading..', { id: 'login' });
+    }
+    if (isSuccess) {
+      toast.success(data.message, { id: 'login' });
+    }
+    if (isError) {
+      toast.error(error.message, { id: 'login' });
+    }
+  }, [isSuccess, isError, isLoading, error, data]);
   return (
     <>
-      <div className=" grid grid-cols-3 gap-5">
+      <form onSubmit={handleRegister} className=" grid grid-cols-3 gap-5">
         <div>
           <label htmlFor="">Full Name</label>
           <br />
           <input
             type="text"
             required
+            name="fullName"
             placeholder="Enter your full name"
             className="border px-3 py-2 w-full rounded-lg"
           />
@@ -18,7 +47,7 @@ const RegisterForm = () => {
           <label htmlFor="">Role</label>
           <br />
           <select
-            name=""
+            name="role"
             id=""
             required
             className="border px-3 py-2 w-full rounded-lg"
@@ -33,6 +62,7 @@ const RegisterForm = () => {
           <input
             type="text"
             required
+            name="phoneNumber"
             placeholder="Enter your phone number"
             className="border px-3 py-2 w-full rounded-lg"
           />
@@ -43,6 +73,7 @@ const RegisterForm = () => {
           <input
             required
             type="text"
+            name="email"
             placeholder="Enter your email"
             className="border px-3 py-2 w-full rounded-lg"
           />
@@ -52,6 +83,7 @@ const RegisterForm = () => {
           <br />
           <input
             required
+            name="password"
             type="text"
             placeholder="*********"
             className="border px-3 py-2 w-full rounded-lg"
@@ -65,7 +97,7 @@ const RegisterForm = () => {
             className="px-3 py-2 bg-gray-200  duration-500   text-gray-500 font-semibold w-full rounded-lg my-auto"
           />
         </div>
-      </div>
+      </form>
       <div className="mt-10">
         <p className="text-center ">
           ALready have an account?{' '}
