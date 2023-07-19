@@ -5,8 +5,21 @@ import DashSideNav from '../components/DashboardComponent/DashboardSideNav';
 import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
 
 import DashboardHeader from '../components/DashboardComponent/DashboardHeader';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchUser } from '../redux/user/userSlice';
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+  const token = localStorage.getItem('accessToken');
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUser(token));
+    if (!user?.email) {
+      navigate('/login');
+    }
+  }, [token, dispatch, navigate, user]);
+
   return (
     <div className="grid grid-cols-6 gap-5  ">
       <div className="col-span-1   h-[100vh] bg-white px-4 sticky top-0">

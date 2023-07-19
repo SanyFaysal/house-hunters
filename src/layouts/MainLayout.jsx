@@ -1,12 +1,15 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 
-
 export default function MainLayout() {
+  const { pathname } = useLocation();
+
+  const isHome = pathname === '/';
+  console.log(pathname);
   return (
     <div>
-      <Navbar />
-      <div className="pt-16">
+      {isHome && <Navbar />}
+      <div className={`${isHome && 'pt-16'}`}>
         <Outlet />
       </div>
     </div>

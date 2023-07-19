@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../redux/user/userApi';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [login, { data, isSuccess, isError, isLoading, error }] =
@@ -22,10 +23,14 @@ const LoginForm = () => {
     if (isSuccess) {
       toast.success(data.message, { id: 'login' });
     }
+    if (isSuccess && data) {
+      localStorage.setItem('accessToken', data?.token);
+      navigate('/dashboard');
+    }
     if (isError) {
       toast.error(error.message, { id: 'login' });
     }
-  }, [isSuccess, isError, isLoading, error, data]);
+  }, [isSuccess, isError, isLoading, error, data, navigate]);
   return (
     <div className=" grid grid-cols-1 gap-2 mt-8">
       <div>

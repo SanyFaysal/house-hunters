@@ -23,48 +23,50 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/house/:id',
+        path: 'house/:id',
         element: <HouseDetails />,
       },
+
+      {
+        path: 'register',
+        element: <Register />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+
+      {
+        path: 'dashboard',
+        element: <Dashboard />,
+        children: [
+          {
+            index: true,
+            element: <MyHouses />,
+          },
+          {
+            path: 'myHouses',
+            element: <MyHouses />,
+          },
+          {
+            path: 'addHouse',
+            element: <AddNewHouse />,
+          },
+          {
+            path: 'editHouse/:id',
+            element: <EditHouse />,
+          },
+          {
+            path: 'myBookings',
+            element: <MyBookings />,
+          },
+        ],
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+      },
     ],
-  },
-  {
-    path: '/dashboard',
-    element: <Dashboard />,
-    children: [
-      {
-        index: true,
-        element: <MyHouses />,
-      },
-      {
-        path: 'myHouses',
-        element: <MyHouses />,
-      },
-      {
-        path: 'addHouse',
-        element: <AddNewHouse />,
-      },
-      {
-        path: 'editHouse',
-        element: <EditHouse />,
-      },
-      {
-        path: 'myBookings',
-        element: <MyBookings />,
-      },
-    ],
-  },
-  {
-    path: '/register',
-    element: <Register />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
   },
 ]);
 

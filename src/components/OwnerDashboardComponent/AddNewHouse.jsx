@@ -3,9 +3,13 @@
 import { useEffect, useState } from 'react';
 import { useAddHouseMutation } from '../../redux/house/houseApi';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // import { toast } from 'react-hot-toast';
 
 const AddNewHouse = () => {
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
   const initialPhoneNumber = '+8801';
   const [phoneNumber, setPhoneNumber] = useState(initialPhoneNumber);
   const [addNewHouse, { data, isSuccess, isLoading, isError, error }] =
@@ -57,7 +61,11 @@ const AddNewHouse = () => {
     if (isError) {
       toast.error(error.message, { id: 'addHouse' });
     }
-  }, [isSuccess, isError, isLoading, error, data]);
+
+    if (!user?.email) {
+      navigate('/login');
+    }
+  }, [isSuccess, isError, isLoading, error, data, user, navigate]);
   return (
     <div className="bg-white p-5  rounded-lg my-2">
       <h1 className="text-xl font-semibold">Add a New House </h1>

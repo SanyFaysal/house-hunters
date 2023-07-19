@@ -25,6 +25,9 @@ const RegisterForm = () => {
     if (isSuccess) {
       toast.success(data.message, { id: 'login' });
     }
+    if (isSuccess && data) {
+      localStorage.setItem('accessToken', data?.token);
+    }
     if (isError) {
       toast.error(error.message, { id: 'login' });
     }

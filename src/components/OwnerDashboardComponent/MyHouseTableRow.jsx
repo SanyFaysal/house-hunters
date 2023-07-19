@@ -1,15 +1,16 @@
 /* eslint-disable react/prop-types */
 import { FiEdit2, FiEye, FiTrash2 } from 'react-icons/fi';
-import { RxCross1 } from 'react-icons/rx';
+
 import houseImg from '../../assets/house.jpg';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDeleteHouseMutation } from '../../redux/house/houseApi';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const MyHouseTableRow = ({ house }) => {
   const navigate = useNavigate();
-
+  const { user } = useSelector((state) => state.auth);
   const [deleteHouse, { data, isLoading, isSuccess, isError, error }] =
     useDeleteHouseMutation();
 
@@ -27,7 +28,10 @@ const MyHouseTableRow = ({ house }) => {
     if (isError) {
       toast.error(error.message, { id: 'delete' });
     }
-  }, [isSuccess, isError, isLoading, error, data]);
+    if (!user?.email) {
+      navigate('/login');
+    }
+  }, [isSuccess, isError, isLoading, error, data, user, navigate]);
   return (
     <tr>
       <td>
@@ -57,7 +61,7 @@ const MyHouseTableRow = ({ house }) => {
       <td>
         <div className="flex gap-4  items-center">
           <FiEdit2
-            onClick={() => navigate(`/house/${house?._id}`)}
+            onClick={() => navigate(`/dashboard/editHouse/${house?._id}`)}
             className="text-lg hover:text-blue-500"
           />
           <FiEye

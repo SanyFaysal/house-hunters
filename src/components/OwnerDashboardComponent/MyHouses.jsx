@@ -1,10 +1,21 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PaginationPart from '../shared/PaginationPart';
 import MyHouseTableRow from './MyHouseTableRow';
 import { useGetHousesQuery } from '../../redux/house/houseApi';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const MyHouses = () => {
   const { data } = useGetHousesQuery();
+
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!user?.email) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
   return (
     <div className="overflow-x-auto bg-white  my-2 rounded-lg">
       <div className="flex justify-between p-5">
