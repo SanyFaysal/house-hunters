@@ -24,6 +24,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logOut: (state, action) => {
+      console.log({ action });
+      state.user = action.payload;
+    },
+    setUser: (state, action) => {
       state.user = {
         email: '',
         role: '',
@@ -49,10 +53,10 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = false;
-        state.error = action.error.message;
+        state.error = action.error?.data?.error;
       });
   },
 });
 
-export const { logOut } = userSlice.actions;
+export const { logOut, setUser } = userSlice.actions;
 export default userSlice.reducer;

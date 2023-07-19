@@ -3,8 +3,24 @@ import apiSlice from '../api/apiSlice';
 const houseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getHouses: builder.query({
-      query: () => ({
-        url: '/house',
+      query: ({ sort, filter }) => {
+        const params = new URLSearchParams();
+        params.append('sort', JSON.stringify(sort));
+        params.append('filter', JSON.stringify(filter));
+        const queryString = params.toString();
+        return {
+          url: `/house?${queryString}`,
+        };
+      },
+      providesTags: ['HOUSE'],
+    }),
+
+    getMyHouses: builder.query({
+      query: (token) => ({
+        url: '/house/myHouse',
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
       }),
       providesTags: ['HOUSE'],
     }),
@@ -18,25 +34,37 @@ const houseApi = apiSlice.injectEndpoints({
     }),
 
     addHouse: builder.mutation({
-      query: (data) => ({
-        url: '/house/addHouse',
-        method: 'POST',
-        body: data,
-      }),
+      query: ({ token, ...data }) => {
+        console.log({ token });
+        return {
+          url: '/house/addHouse',
+          method: 'POST',
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+          body: data,
+        };
+      },
       invalidatesTags: ['HOUSE'],
     }),
     editHouse: builder.mutation({
-      query: ({ id, ...data }) => ({
+      query: ({ id, token, ...data }) => ({
         url: `/house/${id}`,
         method: 'PATCH',
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
         body: data,
       }),
       invalidatesTags: ['HOUSE'],
     }),
     deleteHouse: builder.mutation({
-      query: (id) => ({
+      query: ({ id, token }) => ({
         url: `/house/${id}`,
         method: 'DELETE',
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
       }),
       invalidatesTags: ['HOUSE'],
     }),
@@ -44,6 +72,7 @@ const houseApi = apiSlice.injectEndpoints({
 });
 
 export const {
+  useGetMyHousesQuery,
   useAddHouseMutation,
   useDeleteHouseMutation,
   useEditHouseMutation,

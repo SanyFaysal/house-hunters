@@ -7,7 +7,9 @@ const Register = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
-    navigate('/');
+    if (user?.email) {
+      navigate('/');
+    }
   }, [user, navigate]);
   return (
     <div className=" flex w-full justify-center h-[100vh]  items-center">

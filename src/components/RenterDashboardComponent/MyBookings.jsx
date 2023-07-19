@@ -4,13 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import BookingCard from './BookingCard';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { useGetBookingsQuery } from '../../redux/booking/bookingApi';
 
 // import { toast } from 'react-hot-toast';
 
 const MyBookings = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-
+  const token = localStorage.getItem('accessToken');
+  const { data } = useGetBookingsQuery(token);
   useEffect(() => {
     if (!user?.email) {
       navigate('/login');
@@ -24,8 +26,10 @@ const MyBookings = () => {
           Free up space
         </button>
       </div>
-      <BookingCard />
-      <BookingCard />
+
+      {data?.data?.map((booking) => (
+        <BookingCard key={booking?._id} booking={booking} />
+      ))}
     </div>
   );
 };

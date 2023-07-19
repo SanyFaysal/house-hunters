@@ -27,9 +27,11 @@ export default function Navbar() {
             </div>
             <div>
               <ul className="flex items-center gap-5 my-1 font-medium">
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
-                </li>
+                {user?.email && (
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                )}
                 {!user?.email ? (
                   <>
                     <li>

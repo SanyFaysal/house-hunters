@@ -1,9 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../redux/user/userApi';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from '../../redux/user/userSlice';
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [register, { data, isSuccess, isError, isLoading, error }] =
     useRegisterMutation();
 
@@ -27,11 +31,13 @@ const RegisterForm = () => {
     }
     if (isSuccess && data) {
       localStorage.setItem('accessToken', data?.token);
+      dispatch(fetchUser(data?.token));
+      navigate('/dashboard');
     }
     if (isError) {
-      toast.error(error.message, { id: 'login' });
+      toast.error(error?.data?.error, { id: 'login' });
     }
-  }, [isSuccess, isError, isLoading, error, data]);
+  }, [isSuccess, isError, isLoading, error, data, navigate, dispatch]);
   return (
     <>
       <form onSubmit={handleRegister} className=" grid grid-cols-3 gap-5">
@@ -111,6 +117,10 @@ const RegisterForm = () => {
           </Link>
         </p>
       </div>
+
+      <Link to="/" className="text-center mt-5 block underline">
+        Go to home
+      </Link>
     </>
   );
 };

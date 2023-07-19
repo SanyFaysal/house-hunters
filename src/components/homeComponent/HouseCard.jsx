@@ -1,10 +1,27 @@
 /* eslint-disable react/prop-types */
+import { useSelector } from 'react-redux';
 import houseimg from '../../assets/house.jpg';
 
 import BookingModal from '../modal/BookingModal';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { useState } from 'react';
 
 const HouseCard = ({ house }) => {
+  const { user } = useSelector((state) => state.auth);
+  const [houseInfo, setHouseInfo] = useState({});
+  const handleOpenModal = () => {
+    if (!user?.email) {
+      return toast.error('Please Login first', { id: 'booking' });
+    }
+    if (user?.email && user?.role === 'houseRenter') {
+      return window.my_modal_6.showModal();
+    } else if (user?.email && user?.role === 'houseOwner') {
+      toast.error("As a House Owner , you can't book any house !!!", {
+        id: 'booking',
+      });
+    }
+  };
   return (
     <div className="bg-white p-4 rounded">
       <div className="grid grid-cols-9 gap-x-4 ">
@@ -59,18 +76,29 @@ const HouseCard = ({ house }) => {
                 Details
               </Link>
 
-              <label
-                htmlFor="my_modal_6"
-                className=" text-sm py-3 bg-slate-100 text-slate-600 my-auto hover:text-slate-100 duration-500 hover:bg-slate-600 font-semibold px-3 py-1 rounded"
-              >
-                Book House
-              </label>
+              {!user?.role === 'houseRenter' && (
+                <label
+                  onClick={handleOpenModal}
+                  className=" text-sm py-3 bg-slate-100 text-slate-600 my-auto hover:text-slate-100 duration-500 hover:bg-slate-600 font-semibold px-3 py-1 rounded"
+                >
+                  Book House
+                </label>
+              )}
+              {user?.role === 'houseRenter' && (
+                <label
+                  htmlFor="my_modal_6"
+                  onClick={() => setHouseInfo(house)}
+                  className=" text-sm py-3 bg-slate-100 text-slate-600 my-auto hover:text-slate-100 duration-500 hover:bg-slate-600 font-semibold px-3 py-1 rounded"
+                >
+                  Book House
+                </label>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      <BookingModal />
+      <BookingModal houseInfo={houseInfo} />
     </div>
   );
 };

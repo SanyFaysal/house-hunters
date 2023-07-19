@@ -7,14 +7,13 @@ import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
 import DashboardHeader from '../components/DashboardComponent/DashboardHeader';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchUser } from '../redux/user/userSlice';
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const token = localStorage.getItem('accessToken');
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchUser(token));
     if (!user?.email) {
       navigate('/login');
     }

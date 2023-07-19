@@ -2,8 +2,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../redux/user/userApi';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { fetchUser } from '../../redux/user/userSlice';
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,13 +27,15 @@ const LoginForm = () => {
       toast.success(data.message, { id: 'login' });
     }
     if (isSuccess && data) {
+      console.log(data);
       localStorage.setItem('accessToken', data?.token);
+      dispatch(fetchUser(data?.token));
       navigate('/dashboard');
     }
     if (isError) {
-      toast.error(error.message, { id: 'login' });
+      toast.error(error?.data?.error, { id: 'login' });
     }
-  }, [isSuccess, isError, isLoading, error, data, navigate]);
+  }, [isSuccess, isError, isLoading, error, data, navigate, dispatch]);
   return (
     <div className=" grid grid-cols-1 gap-2 mt-8">
       <div>
@@ -74,6 +79,10 @@ const LoginForm = () => {
             </span>
           </Link>
         </p>
+
+        <Link to="/" className="text-center mt-5 block underline">
+          Go to home
+        </Link>
       </div>
     </div>
   );

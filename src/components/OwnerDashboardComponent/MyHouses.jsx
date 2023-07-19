@@ -1,12 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
 import PaginationPart from '../shared/PaginationPart';
 import MyHouseTableRow from './MyHouseTableRow';
-import { useGetHousesQuery } from '../../redux/house/houseApi';
+import { useGetMyHousesQuery } from '../../redux/house/houseApi';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
 const MyHouses = () => {
-  const { data } = useGetHousesQuery();
+  const token = localStorage.getItem('accessToken');
+
+  const { data } = useGetMyHousesQuery(token);
 
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
@@ -14,6 +16,9 @@ const MyHouses = () => {
   useEffect(() => {
     if (!user?.email) {
       navigate('/login');
+    }
+    if (user?.role === 'houseRenter') {
+      navigate('/dashboard/myBookings');
     }
   }, [user, navigate]);
   return (

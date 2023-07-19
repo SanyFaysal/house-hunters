@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 // import { toast } from 'react-hot-toast';
 
 const AddNewHouse = () => {
+  const token = localStorage.getItem('accessToken');
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const initialPhoneNumber = '+8801';
@@ -34,7 +35,7 @@ const AddNewHouse = () => {
     const rentPerMonth = e.target.rentPerMonth.value;
     const phoneNumber = e.target.phoneNumber.value;
     const description = e.target.description.value;
-
+    console.log(token);
     const houseData = {
       name,
       address,
@@ -47,6 +48,11 @@ const AddNewHouse = () => {
       rentPerMonth,
       phoneNumber,
       description,
+      owner: {
+        email: user?.email,
+        ownerInfo: user?._id,
+      },
+      token,
     };
     addNewHouse(houseData);
   };
@@ -59,7 +65,7 @@ const AddNewHouse = () => {
       toast.success(data.message, { id: 'addHouse' });
     }
     if (isError) {
-      toast.error(error.message, { id: 'addHouse' });
+      toast.error(error?.data?.error, { id: 'addHouse' });
     }
 
     if (!user?.email) {
@@ -178,12 +184,12 @@ const AddNewHouse = () => {
           />
         </div>
         <div>
-          <label htmlFor="">Rent per month </label>
+          <label htmlFor="">Rent per month (TK)</label>
           <br />
           <input
             required
             name="rentPerMonth"
-            type="text"
+            type="number"
             placeholder="Rent amount in BDT"
             className="border px-3 py-2 w-full rounded-lg"
           />

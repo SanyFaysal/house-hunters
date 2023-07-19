@@ -26,7 +26,7 @@ const MyHouseTableRow = ({ house }) => {
       toast.success(data.message, { id: 'delete' });
     }
     if (isError) {
-      toast.error(error.message, { id: 'delete' });
+      toast.error(error?.data?.error, { id: 'delete' });
     }
     if (!user?.email) {
       navigate('/login');

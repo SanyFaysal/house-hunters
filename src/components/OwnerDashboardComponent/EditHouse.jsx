@@ -71,7 +71,7 @@ const EditHouse = () => {
       toast.success(data.message, { id: 'addHouse' });
     }
     if (isError) {
-      toast.error(error.message, { id: 'addHouse' });
+      toast.error(error?.data?.error, { id: 'addHouse' });
     }
     if (!user?.email) {
       navigate('/login');
@@ -205,7 +205,7 @@ const EditHouse = () => {
           <input
             name="rentPerMonth"
             required
-            type="text"
+            type="number"
             defaultValue={house?.rentPerMonth}
             placeholder="Rent amount in BDT"
             className="border px-3 py-2 w-full rounded-lg"

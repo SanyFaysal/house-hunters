@@ -1,13 +1,26 @@
+/* eslint-disable react/prop-types */
 import { Stack } from '@mui/material';
+import { useState } from 'react';
 import Pagination from '@mui/material/Pagination';
-const PaginationPart = () => {
+import {} from 'react-icons/md';
+
+const ShopPagination = ({ setSort, sort, pageFound, data }) => {
+  const [page, setPage] = useState(1);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+
+    setSort({ ...sort, pageNumber: Number(value) });
+  };
+
   return (
-    <div>
-      <Stack spacing={2}>
-        <Pagination count={2} />
+    <div className="d-flex justify-content-center ">
+      <Stack>
+        {/* <Typography sx={{ textAlign: "center" }}>Page: {page}</Typography> */}
+        <Pagination count={pageFound} page={page} onChange={handleChange} />
       </Stack>
     </div>
   );
 };
 
-export default PaginationPart;
+export default ShopPagination;

@@ -1,8 +1,33 @@
+/* eslint-disable react/prop-types */
+import { useNavigate } from 'react-router-dom';
 import house from '../../assets/house.jpg';
 
 import { FiEye, FiTrash2 } from 'react-icons/fi';
+import { useDeleteBookingMutation } from '../../redux/booking/bookingApi';
+import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
-const BookingCard = () => {
+const BookingCard = ({ booking }) => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem('accessToken');
+  const [deleteBooking, { isLoading, data, isSuccess, isError, error }] =
+    useDeleteBookingMutation();
+  const handleBookingDelete = (id) => {
+    deleteBooking({ id, token });
+  };
+
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading('Loading..', { id: 'addHouse' });
+    }
+    if (isSuccess) {
+      toast.success(data.message, { id: 'addHouse' });
+    }
+    if (isError) {
+      toast.error(error?.data?.error, { id: 'addHouse' });
+    }
+  }, [isSuccess, isError, isLoading, error, data]);
+
   return (
     <div className="my-2 rounded ">
       <div className="grid grid-cols-9 gap-x-4 bg-gray-100 rounded-lg p-4 ">
@@ -18,11 +43,17 @@ const BookingCard = () => {
               {/* <p className=" btn btn-sm bg-white">
                 <FiEdit2 className="text-xs inline hover:text-blue-500" /> Edit
               </p> */}
-              <p className=" btn btn-sm bg-white ">
+              <p
+                onClick={() => navigate(`/house/${booking?.house?._id}`)}
+                className=" btn btn-sm bg-white "
+              >
                 <FiEye className="text-sm hover:text-blue-500" />
                 Details
               </p>
-              <p className=" btn btn-sm bg-white normal-case">
+              <p
+                onClick={() => handleBookingDelete(booking?._id)}
+                className=" btn btn-sm bg-white normal-case"
+              >
                 <FiTrash2 className="text-sm hover:text-red-400" /> Delete
               </p>
             </div>
