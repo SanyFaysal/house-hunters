@@ -1,7 +1,7 @@
-import houseBanner from '../assets/house-banner.jpg';
+import houseBanner from '../../assets/house-banner.jpg';
 import { useParams } from 'react-router-dom';
-import { useGetSingleHousesQuery } from '../redux/house/houseApi';
-import Navbar from '../layouts/Navbar';
+import { useGetSingleHousesQuery } from '../../redux/house/houseApi';
+import Navbar from '../../layouts/Navbar';
 export default function HouseDetails() {
   const { id } = useParams();
 
@@ -13,9 +13,9 @@ export default function HouseDetails() {
         <Navbar />
       </div>
       <div className="grid grid-cols-4 gap-10 px-16 pb-20 ">
-        <div className="col-span-3 flex-col gap-y-10 max-w-7xl mx-auto items-center ">
-          <div className=" flex justify-center mb-5">
-            <img src={houseBanner} alt="" className="h-60" />
+        <div className="col-span-3 flex-col gap-y-10 max-w-7xl   ">
+          <div className=" flex justify-start mb-5">
+            <img src={houseBanner} alt="" className="h-62 w-full" />
           </div>
 
           <div className="mb-5">

@@ -1,7 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
-import logo from '../assets/logo.png';
-import { useDispatch, useSelector } from 'react-redux';
-import { logOut } from '../redux/user/userSlice';
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../redux/user/userSlice";
 
 export default function Navbar() {
   const { user } = useSelector((state) => state.auth);
@@ -9,7 +9,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
     dispatch(logOut());
   };
   return (
@@ -19,7 +19,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-auto ">
             <div>
               <img
-                onClick={() => navigate('/')}
+                onClick={() => navigate("/")}
                 className="w-32 "
                 src={logo}
                 alt="log"
@@ -27,6 +27,9 @@ export default function Navbar() {
             </div>
             <div>
               <ul className="flex items-center gap-5 my-1 font-medium">
+                <li>
+                  <Link to="/Login">Wishlist</Link>
+                </li>
                 {user?.email && (
                   <li>
                     <Link to="/dashboard">Dashboard</Link>

@@ -6,3 +6,8 @@
 body{
   background-color: rgb(241, 241, 241);
 }
+.architects-daughter-regular {
+  font-family: "Architects Daughter", cursive;
+  font-weight: 400;
+  font-style: normal;
+}

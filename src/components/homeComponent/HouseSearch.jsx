@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useGetHousesQuery } from '../../redux/house/houseApi';
 import PaginationPart from '../shared/PaginationPart';
 
-import HouseCard from './HouseCard';
+import HouseCard from '../houseComponent/HouseCard';
 import SearchSideBar from './SearchSideBar';
-
+console.log(SearchSideBar)
 const HouseSearch = () => {
   const [filter, setFilter] = useState({
     city: '',
@@ -14,6 +14,7 @@ const HouseSearch = () => {
     availability: '',
     rentPerMonth: [],
   });
+  console.log(setFilter)
   const [sort, setSort] = useState({
     perPage: 10,
     pageNumber: 1,
@@ -26,15 +27,17 @@ const HouseSearch = () => {
     <div className="">
       <div className="grid grid-cols-7 mx-16  gap-4 mt-4">
         <div className="col-span-2 ">
-          <SearchSideBar filter={filter} setFilter={setFilter} />
+          {/* <SearchSideBar filter={filter} setFilter={setFilter} /> */}
         </div>
-        <div className="col-span-5">
-          <div className=" grid grid-cols-1 gap-2">
+        <div className="col-span-7">
+          <div className=" grid grid-cols-4 gap-5">
             {data?.data?.map((house) => (
               <HouseCard key={house?._id} house={house} />
             ))}
 
-            <div className="my-6 mx-auto">
+         
+          </div>
+          <div className="my-12 mx-auto w-full flex justify-center">
               <PaginationPart
                 sort={sort}
                 setSort={setSort}
@@ -42,7 +45,6 @@ const HouseSearch = () => {
                 data={data?.data}
               />
             </div>
-          </div>
         </div>
       </div>
     </div>

@@ -11,7 +11,8 @@ import AddNewHouse from '../components/OwnerDashboardComponent/AddNewHouse';
 import MyHouses from '../components/OwnerDashboardComponent/MyHouses';
 import EditHouse from '../components/OwnerDashboardComponent/EditHouse';
 import MyBookings from '../components/RenterDashboardComponent/MyBookings';
-import HouseDetails from '../pages/HouseDetails';
+import HouseDetails from '../components/houseComponent/HouseDetails';
+
 
 const routes = createBrowserRouter([
   {
