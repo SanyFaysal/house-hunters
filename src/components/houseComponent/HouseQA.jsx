@@ -1,43 +1,65 @@
+/* eslint-disable react/prop-types */
+
 import { MdOutlineQuestionAnswer } from "react-icons/md";
 import { PiArrowBendDownRightFill } from "react-icons/pi";
+import { useAddQuestionMutation } from "../../redux/house/houseApi";
+import MakeAnswer from "./MakeAnswer";
+import { formateDate } from "../../utils/formatedDate";
 
-export default function HouseQA() {
+export default function HouseQA({ house }) {
+  const [addQuestion] = useAddQuestionMutation();
+  const handleAddQuestion = (event) => {
+    event.preventDefault();
+    const qus = event.target.qus.value;
+    console.log("id", qus);
+    addQuestion({ id: house._id, qus });
+  };
   return (
     <div>
       <h3 className="text-xl  my-2">Qusestions</h3>
-      <div className="mb-4">
+      <form onSubmit={handleAddQuestion} className="mb-4">
         <input
+          name="qus"
           type="text"
           className="focus:outline-blue-500  rounded py-1 px-3 w-1/2"
         />
-        <button className="mx-2  bg-gray-500 rounded  text-white px-3 py-1 r">
+        <button
+          type="submit"
+          className="mx-2  bg-gray-500 rounded  text-white px-3 py-1 r"
+        >
           {" "}
           Post
         </button>
-      </div>
+      </form>
 
       <div>
         <div className=" rounded-full  inline ">
-          <div className="flex gap-2 items-center">
-            <MdOutlineQuestionAnswer /> <span>Do you have any discount ? </span>
-          </div>
-          <div className="ml-5 mt-2 flex items-center gap-2">
-            <PiArrowBendDownRightFill /> yes, you will get 98% percent bonus for
-            this.
-          </div>
-          <div className="mb-4 ml-5">
-            <p className="underline">Make Answer</p>
-            {/* <div>
-              <input
-                type="text"
-                className="focus:outline-blue-500  rounded py-1 px-3 w-1/3"
-              />
-              <button className="mx-2  bg-gray-500 rounded  text-white px-3 py-1 r">
+          {house?.questions?.map((question) => (
+            <>
+              {" "}
+              <div className="">
+                <p className="text-xl">
+                  <MdOutlineQuestionAnswer className="inline" />{" "}
+                  <span>{question?.qus} </span>
+                </p>
+                <p>at {formateDate(question?.created_at)}</p>
+              </div>
+              <div className="ml-5 mt-2  mb-2">
                 {" "}
-                Post
-              </button>
-            </div> */}
-          </div>
+                {question?.answers?.map((answer) => (
+                  <>
+                    <p>
+                      {" "}
+                      <PiArrowBendDownRightFill className="inline" />{" "}
+                      {answer?.ans}
+                    </p>
+                    <p>at {formateDate(question?.created_at)}</p>
+                  </>
+                ))}
+              </div>
+              <MakeAnswer question={question} />
+            </>
+          ))}
         </div>
       </div>
     </div>

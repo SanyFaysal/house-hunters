@@ -8,6 +8,7 @@ const houseApi = apiSlice.injectEndpoints({
         params.append('sort', JSON.stringify(sort));
         params.append('filter', JSON.stringify(filter));
         const queryString = params.toString();
+        console.log('query', queryString)
         return {
           url: `/house?${queryString}`,
         };
@@ -68,6 +69,17 @@ const houseApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['HOUSE'],
     }),
+    addQuestion: builder.mutation({
+      query: ({ id,qus }) => {
+        console.log('from api', qus)
+        return {
+          url: `/house/${id}/question`,
+          method: 'PATCH',
+         body:{qus}
+        }
+      },
+      invalidatesTags: ['HOUSE'],
+    }),
   }),
 });
 
@@ -78,4 +90,5 @@ export const {
   useEditHouseMutation,
   useGetHousesQuery,
   useGetSingleHousesQuery,
+  useAddQuestionMutation
 } = houseApi;

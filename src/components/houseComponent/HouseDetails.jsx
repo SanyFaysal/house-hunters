@@ -44,7 +44,7 @@ export default function HouseDetails() {
               Book house
             </button>
           </div>
-          <HouseQA/>
+          <HouseQA house={house}/>
         </div>
  
    

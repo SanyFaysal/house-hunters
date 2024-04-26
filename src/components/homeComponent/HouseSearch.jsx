@@ -14,15 +14,15 @@ const HouseSearch = () => {
     availability: '',
     rentPerMonth: [],
   });
-  console.log(setFilter)
+
   const [sort, setSort] = useState({
     perPage: 10,
     pageNumber: 1,
   });
-  console.log(filter);
+
   const { data } = useGetHousesQuery({ filter, sort });
 
-  console.log(data);
+
   return (
     <div className="">
       <div className="grid grid-cols-7 mx-16  gap-4 mt-4">
