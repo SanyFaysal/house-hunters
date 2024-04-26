@@ -12,6 +12,7 @@ import MyHouses from '../components/OwnerDashboardComponent/MyHouses';
 import EditHouse from '../components/OwnerDashboardComponent/EditHouse';
 import MyBookings from '../components/RenterDashboardComponent/MyBookings';
 import HouseDetails from '../components/houseComponent/HouseDetails';
+import Wishlist from '../pages/Wishlist';
 
 
 const routes = createBrowserRouter([
@@ -26,6 +27,10 @@ const routes = createBrowserRouter([
       {
         path: 'house/:id',
         element: <HouseDetails />,
+      },
+      {
+        path: 'wishlist',
+        element: <Wishlist />,
       },
 
       {

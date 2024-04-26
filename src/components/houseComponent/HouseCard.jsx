@@ -126,7 +126,7 @@ const HouseCard = ({ house }) => {
           </Link>
        {  !alreadyAddedToWishlist ?  <button
             onClick={() => handleAddToWishtlist(house)}
-            className={`my-auto py-[10px] px-2 text-2xl bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded
+            className={`my-auto py-[10px] px-2 text-xl bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded
           
             `}
           >
@@ -135,7 +135,7 @@ const HouseCard = ({ house }) => {
           
           <button
           onClick={() => handleRemoveFromWishtlist(house)}
-          className={`my-auto py-[10px] px-2 text-2xl bg-red-100 text-red-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded
+          className={`my-auto py-[10px] px-2 text-xl bg-red-100 text-red-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded
         
           `}
         >
