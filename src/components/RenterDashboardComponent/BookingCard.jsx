@@ -27,17 +27,15 @@ const BookingCard = ({ booking }) => {
       toast.error(error?.data?.error, { id: 'addHouse' });
     }
   }, [isSuccess, isError, isLoading, error, data]);
-
+console.log({booking})
   return (
     <div className="my-2 rounded ">
-      <div className="grid grid-cols-9 gap-x-4 bg-gray-100 rounded-lg p-4 ">
-        <div className="col-span-1">
-          <img className="h-28 w-full rounded-lg shadow" src={house} alt="" />
-        </div>
+      <div className="grid grid-cols-8 gap-x-4 bg-gray-100 rounded-lg p-4 ">
+        
         <div className="col-span-8">
           <div className="flex justify-between  gap-2">
             <div>
-              <p className=" text-sm font-semibold">Amader Sopno Vila</p>
+              <p className=" text-sm font-semibold">{booking?.house?.name}</p>
             </div>
             <div className="flex gap-2">
               {/* <p className=" btn btn-sm bg-white">
@@ -63,27 +61,27 @@ const BookingCard = ({ booking }) => {
             <div>
               <h5 className="text-sm font-light">Address </h5>
               <p className=" text-sm font-semibold">
-                Gazipur, Dhaka, sreepur, Proholadpur, Kadma ,
+                {booking?.house?.address}
               </p>
             </div>
             <div>
               <h5 className="text-sm font-light">City </h5>
-              <p className=" text-sm font-semibold">Gazipur</p>
+              <p className=" text-sm font-semibold">{booking?.house?.city}</p>
             </div>
 
             <div>
               <h5 className="text-sm font-light">Rented by </h5>
-              <p className="font-semibold text-sm">Abu Sani Faysal</p>
-              <p className="font-semibold text-sm">+8801634319696</p>
+              <p className="font-semibold text-sm">{booking?.email}</p>
+              <p className="font-semibold text-sm">{booking?.phoneNumber}</p>
             </div>
             <div>
               <h5 className="text-sm font-light">House Owner </h5>
-              <p className="font-semibold text-sm">Kalam Sheikh</p>
-              <p className="font-semibold text-sm">+881785452254</p>
+              <p className="font-semibold text-sm">{booking?.house?.owner.email}</p>
+  
             </div>
             <div>
               <h5 className="text-sm font-light">Rent per month </h5>
-              <p className="  font-semibold">12000 TK</p>
+              <p className="  font-semibold">{booking?.house?.rentPerMonth}</p>
             </div>
           </div>
         </div>

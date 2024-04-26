@@ -1,5 +1,5 @@
 import houseBanner from "../../assets/house-banner.jpg";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetSingleHousesQuery } from "../../redux/house/houseApi";
 import Navbar from "../../layouts/Navbar";
 import HouseDetailsSideInfo from "./HouseDetailsSideInfo";
@@ -40,9 +40,9 @@ export default function HouseDetails() {
             <h1 className="text-lg ">{house?.description}</h1>
           </div>
           <div className="flex justify-start my-5">
-            <button className=" px-4 py-2 text-lg rounded-lg bg-blue-500 text-white h-fit">
+            <Link to={`/house-booking/${house?._id}`} className=" px-4 py-2 text-lg rounded-lg bg-blue-500 text-white h-fit">
               Book house
-            </button>
+            </Link>
           </div>
           <HouseQA house={house}/>
         </div>

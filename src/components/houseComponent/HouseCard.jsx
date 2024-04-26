@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useDispatch, useSelector } from "react-redux";
-import houseimg from "../../assets/house.jpg";
+
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 
-import BookingModal from "../modal/BookingModal";
+
 import { Link } from "react-router-dom";
 // import { toast } from 'react-hot-toast';
-import { useState } from "react";
+
 import {
   addToWishlist,
   removeFromWishlist,
@@ -19,7 +19,7 @@ const HouseCard = ({ house }) => {
     auth: { user },
     wishlist: { houses },
   } = useSelector((state) => state);
-  const [houseInfo, setHouseInfo] = useState({});
+
   // const handleOpenModal = () => {
   //   if (!user?.email) {
   //     return toast.error('Please Login first', { id: 'booking' });
@@ -77,27 +77,27 @@ const HouseCard = ({ house }) => {
           </div>
 
         </div>
-        <div className=" flex gap-3 justify-around  pb-4">
+        <div className=" flex gap-3 justify-between px-4  pb-4">
        
           {user?.role === "houseRenter" && (
             <Link 
             
             to={`/house-booking/${house?._id}`}
-              className=" text-sm py-3 bg-slate-100 text-slate-600 my-auto hover:text-slate-100 duration-500 hover:bg-slate-600 font-semibold px-3 py-1 rounded"
+              className=" text-sm py-2 bg-slate-100 text-slate-600 my-auto hover:text-slate-100 duration-500 hover:bg-slate-600 font-semibold px-3 rounded"
             >
               Book House
             </Link>
           )}
           <Link
             to={`/house/${house?._id}`}
-            className=" my-auto py-3 px-2 text-sm bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded"
+            className=" my-auto text-sm py-2 bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3  rounded"
           >
             Details
           </Link>
           {!alreadyAddedToWishlist ? (
             <button
               onClick={() => handleAddToWishtlist(house)}
-              className={`my-auto py-[10px] px-2 text-xl bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded
+              className={`my-auto py-2 px-2 text-xl bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold  rounded
           
             `}
             >
@@ -106,7 +106,7 @@ const HouseCard = ({ house }) => {
           ) : (
             <button
               onClick={() => handleRemoveFromWishtlist(house)}
-              className={`my-auto py-[10px] px-2 text-xl bg-red-100 text-red-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded
+              className={`my-auto  py-2 text-xl bg-red-100 text-red-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded
         
           `}
             >

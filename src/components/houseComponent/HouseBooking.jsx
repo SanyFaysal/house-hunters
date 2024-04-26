@@ -26,7 +26,7 @@ const HouseBooking = () => {
       fullName,
       email,
       phoneNumber,
-      house:params.id,
+      house: params.id,
       token,
     };
 
@@ -54,12 +54,36 @@ const HouseBooking = () => {
         <div className="w-1/2 bg-white">
           <h3 className="font-bold text-lg">
             Book The House <br />
-            <span className="text-orange-500 font-semibold">
-              {houseInfo?.data?.name}
-            </span>
           </h3>
+         
+            <div className=" flex justify-between gap-5 my-2">
+              <div>
+                <h5 className="text-sm font-light">House Name </h5>
+                <p className="text-sm font-semibold">{houseInfo?.data?.name}</p>
+              </div>
+              <div>
+                <h5 className="text-sm font-light">Address </h5>
+                <p className=" text-sm font-semibold">
+                  {houseInfo?.data?.address}
+                </p>
+              </div>
+              <div>
+                <h5 className="text-sm font-light">City </h5>
+                <p className=" text-sm font-semibold">
+                  {houseInfo?.data?.city}
+                </p>
+              </div>
+
+              <div>
+                <h5 className="text-sm font-light">Rent per month </h5>
+                <p className="  font-semibold ">
+                  {houseInfo?.data?.rentPerMonth}
+                </p>
+              </div>
+            </div>
+     
           <form onSubmit={handleBooking}>
-            <div className="grid-cols-1  my-5 ">
+            <div className="grid-cols-1  my-5 text-lg">
               <div>
                 <label htmlFor="">Name</label>
                 <br />
