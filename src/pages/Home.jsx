@@ -4,7 +4,7 @@ import HouseSearch from '../components/homeComponent/HouseSearch';
 const Home = () => {
   return (
     <div>
-      <Banner />
+      {/* <Banner /> */}
       <HouseSearch />
     </div>
   );

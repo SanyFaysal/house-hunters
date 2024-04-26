@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useEditHouseMutation,
   useGetSingleHousesQuery,
-} from '../../redux/house/houseApi';
-import { toast } from 'react-hot-toast';
-import { useSelector } from 'react-redux';
+} from "../../redux/house/houseApi";
+import { toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const EditHouse = () => {
   const navigate = useNavigate();
@@ -15,14 +15,14 @@ const EditHouse = () => {
   const { data: houseData } = useGetSingleHousesQuery(id);
   const house = houseData?.data;
 
-  const initialPhoneNumber = '+8801';
+  const initialPhoneNumber = "+8801";
   const [phoneNumber, setPhoneNumber] = useState(initialPhoneNumber);
   const handlePhoneNumber = (e) => {
     const newValue = e.target.value;
 
     if (
       newValue === initialPhoneNumber ||
-      newValue.startsWith('+8801') ||
+      newValue.startsWith("+8801") ||
       newValue === house?.phoneNumber
     ) {
       setPhoneNumber(newValue);
@@ -33,17 +33,27 @@ const EditHouse = () => {
     useEditHouseMutation();
   const handleUpdateHouse = (e) => {
     e.preventDefault();
-    const name = e.target.name.value;
-    const address = e.target.address.value;
-    const city = e.target.city.value;
-    const bedrooms = e.target.bedrooms.value;
-    const bathrooms = e.target.bathrooms.value;
-    const roomSize = e.target.roomSize.value;
-    const picture = e.target.picture.value;
-    const availabilityDate = e.target.availabilityDate.value;
-    const rentPerMonth = e.target.rentPerMonth.value;
-    const phoneNumber = e.target.phoneNumber.value;
-    const description = e.target.description.value;
+    const name = e?.target?.name?.value ? e?.target?.name?.value : house?.name;
+    const address = e?.target?.address?.value
+      ? e?.target?.address?.value
+      : house?.address;
+    const city = e?.target?.city?.value ? e.target?.city?.value : house?.city;
+    const bedrooms = e?.target?.bedrooms?.value
+      ? e?.target?.bedrooms?.value
+      : house?.bedrooms;
+    const bathrooms = e?.target?.bathrooms?.value
+      ? e?.target?.bathrooms?.value
+      : house?.bathrooms;
+    const roomSize = e?.target?.roomSize?.value
+      ? e?.target?.roomSize?.value
+      : house?.roomSize;
+    // const picture = e.target.picture.value;
+    const availabilityDate = e?.target?.availabilityDate?.value
+      ? e?.target?.availabilityDate?.value
+      : house?.availabilityDate;
+    const rentPerMonth = e?.target?.rentPerMonth?.value ?e?.target?.rentPerMonth?.value : house?.rentPerMonth;
+    const phoneNumber = e?.target?.phoneNumber?.value ? e?.target?.phoneNumber?.value : house?.phoneNumber
+    const description = e?.target?.description?.value ? e?.target?.description?.value : house?.description
 
     const houseData = {
       id,
@@ -53,7 +63,7 @@ const EditHouse = () => {
       bedrooms,
       bathrooms,
       roomSize,
-      picture,
+      // picture,
       availabilityDate,
       rentPerMonth,
       phoneNumber,
@@ -65,16 +75,16 @@ const EditHouse = () => {
 
   useEffect(() => {
     if (isLoading) {
-      toast.loading('Loading..', { id: 'addHouse' });
+      toast.loading("Loading..", { id: "addHouse" });
     }
     if (isSuccess) {
-      toast.success(data.message, { id: 'addHouse' });
+      toast.success(data.message, { id: "addHouse" });
     }
     if (isError) {
-      toast.error(error?.data?.error, { id: 'addHouse' });
+      toast.error(error?.data?.error, { id: "addHouse" });
     }
     if (!user?.email) {
-      navigate('/login');
+      navigate("/login");
     }
   }, [isSuccess, isError, isLoading, error, data, user, navigate]);
 
@@ -102,7 +112,7 @@ const EditHouse = () => {
             Phone Number
             <sm className="text-xs ml-1">
               (Only Bangladeshi numbers are allowed
-            </sm>{' '}
+            </sm>{" "}
             )
           </label>
           <br />
@@ -112,11 +122,11 @@ const EditHouse = () => {
             name="phoneNumber"
             value={house?.phoneNumber}
             onChange={handlePhoneNumber}
-            readOnly={!phoneNumber.startsWith('+8801')}
+            readOnly={!phoneNumber.startsWith("+8801")}
             className="border px-3 py-2 w-full rounded-lg"
           />
         </div>
-        <div className="">
+        {/* <div className="">
           <label htmlFor="">House Picture</label>
           <br />
           <input
@@ -125,7 +135,7 @@ const EditHouse = () => {
             required
             className="border px-3 py-2 w-full rounded-lg"
           />
-        </div>
+        </div> */}
         <div>
           <label htmlFor="">Address</label>
           <br />
@@ -228,7 +238,7 @@ const EditHouse = () => {
           <div className="col-span-1 flex justify-end items-end">
             <input
               type="submit"
-              value="Add House "
+              value="Update House "
               className="px-3 py-2 bg-blue-100 text-blue-500  font-semibold rounded-lg "
             />
           </div>

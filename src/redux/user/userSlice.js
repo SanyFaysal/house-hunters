@@ -11,7 +11,8 @@ let initialState = {
 
 export const fetchUser = createAsyncThunk('auth/fetchUser', async (token) => {
   const response = await fetch(
-    `https://house-hunters-server-1.onrender.com/api/v1/user/me`,
+    // `https://house-hunters-server-1.onrender.com/api/v1/user/me`,
+   `http://localhost:8080/api/v1/user/me`,
     {
       headers: {
         authorization: `Bearer ${token}`,

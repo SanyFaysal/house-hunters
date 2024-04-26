@@ -30,7 +30,7 @@ const AddNewHouse = () => {
     const bedrooms = e.target.bedrooms.value;
     const bathrooms = e.target.bathrooms.value;
     const roomSize = e.target.roomSize.value;
-    const picture = e.target.picture.value;
+    // const picture = e.target.picture.value;
     const availabilityDate = e.target.availabilityDate.value;
     const rentPerMonth = e.target.rentPerMonth.value;
     const phoneNumber = e.target.phoneNumber.value;
@@ -43,7 +43,7 @@ const AddNewHouse = () => {
       bedrooms,
       bathrooms,
       roomSize,
-      picture,
+      // picture,
       availabilityDate,
       rentPerMonth,
       phoneNumber,
@@ -106,7 +106,7 @@ const AddNewHouse = () => {
             className="border px-3 py-2 w-full rounded-lg"
           />
         </div>
-        <div className="">
+        {/* <div className="">
           <label htmlFor="">House Picture</label>
           <br />
           <input
@@ -115,7 +115,7 @@ const AddNewHouse = () => {
             name="picture"
             className="border px-3 py-2 w-full rounded-lg"
           />
-        </div>
+        </div> */}
         <div>
           <label htmlFor="">Address</label>
           <br />

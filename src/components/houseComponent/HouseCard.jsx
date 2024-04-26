@@ -4,45 +4,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 
-
 import { Link } from "react-router-dom";
 // import { toast } from 'react-hot-toast';
 
 import {
-  addToWishlist,
-  removeFromWishlist,
-} from "../../redux/wishlist/wishListSlice";
+  useAddToWishlistMutation,
+  useRemoveFromWishlistMutation,
+} from "../../redux/user/userApi";
+import toast from "react-hot-toast";
 
 const HouseCard = ({ house }) => {
+  const token = localStorage.getItem("accessToken");
   const dispatch = useDispatch();
   const {
     auth: { user },
     wishlist: { houses },
   } = useSelector((state) => state);
 
-  // const handleOpenModal = () => {
-  //   if (!user?.email) {
-  //     return toast.error('Please Login first', { id: 'booking' });
-  //   }
-  //   if (user?.email && user?.role === 'houseRenter') {
-  //     return window.my_modal_6.showModal();
-  //   } else if (user?.email && user?.role === 'houseOwner') {
-  //     toast.error("As a House Owner , you can't book any house !!!", {
-  //       id: 'booking',
-  //     });
-  //   }
-  // };
-
+  const [addToWishlist, { isLoading }] = useAddToWishlistMutation();
+  const [removeFromWishlist, { isLoading: loading }] =
+    useRemoveFromWishlistMutation();
   const handleAddToWishtlist = (house) => {
-    dispatch(addToWishlist(house));
+    if (user?.email) {
+      addToWishlist({ token, houseId: house?._id });
+    } else {
+      toast.error("Please login first!");
+    }
   };
   const handleRemoveFromWishtlist = (house) => {
-    dispatch(removeFromWishlist(house));
+    if (user?.email) {
+      removeFromWishlist({ token, houseId: house?._id });
+    } else {
+      toast.error("Please login first!");
+    }
   };
 
-  const alreadyAddedToWishlist = houses.find(
-    (wishedHouse) => wishedHouse._id === house._id
+  const alreadyAddedToWishlist = house?.wishedBy.find(
+    (wisher) => wisher === user?._id
   );
+
   return (
     <div className="bg-white  rounded-lg ">
       <div className="  rounded-lg ">
@@ -75,14 +75,11 @@ const HouseCard = ({ house }) => {
               <p className="  font-semibold ">{house?.rentPerMonth}</p>
             </div>
           </div>
-
         </div>
         <div className=" flex gap-3 justify-between px-4  pb-4">
-       
           {user?.role === "houseRenter" && (
-            <Link 
-            
-            to={`/house-booking/${house?._id}`}
+            <Link
+              to={`/house-booking/${house?._id}`}
               className=" text-sm py-2 bg-slate-100 text-slate-600 my-auto hover:text-slate-100 duration-500 hover:bg-slate-600 font-semibold px-3 rounded"
             >
               Book House
@@ -94,28 +91,36 @@ const HouseCard = ({ house }) => {
           >
             Details
           </Link>
-          {!alreadyAddedToWishlist ? (
-            <button
-              onClick={() => handleAddToWishtlist(house)}
-              className={`my-auto py-2 px-2 text-xl bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold  rounded
-          
-            `}
-            >
-              <CiHeart />
-            </button>
+          {user?.email && alreadyAddedToWishlist ? (
+            <>
+              {isLoading || loading ? (
+                <span className="loading loading-spinner loading-xs"></span>
+              ) : (
+                <button
+                  onClick={() => handleRemoveFromWishtlist(house)}
+                  className={`my-auto  py-2 text-xl bg-red-100 text-red-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded`}
+                >
+                  <FaHeart />
+                </button>
+              )}
+            </>
           ) : (
-            <button
-              onClick={() => handleRemoveFromWishtlist(house)}
-              className={`my-auto  py-2 text-xl bg-red-100 text-red-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold px-3 py-1 rounded
-        
+            <>
+              {isLoading || loading ? (
+                <span className="loading loading-spinner loading-xs "></span>
+              ) : (
+                <button
+                  onClick={() => handleAddToWishtlist(house)}
+                  className={`my-auto py-2 px-2 text-xl bg-gray-100 text-gray-500 hover:text-gray-100 duration-500 hover:bg-gray-800 font-semibold  rounded
           `}
-            >
-              <FaHeart />
-            </button>
+                >
+                  <CiHeart />
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>
-
     </div>
   );
 };
