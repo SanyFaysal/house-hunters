@@ -5,22 +5,27 @@ import { PiArrowBendDownRightFill } from "react-icons/pi";
 import { useAddQuestionMutation } from "../../redux/house/houseApi";
 import MakeAnswer from "./MakeAnswer";
 import { formateDate } from "../../utils/formatedDate";
+import { useState } from "react";
 
 export default function HouseQA({ house }) {
   const [addQuestion] = useAddQuestionMutation();
+  const [qus, setQus] = useState("");
   const handleAddQuestion = (event) => {
     event.preventDefault();
-    const qus = event.target.qus.value;
+
     console.log("id", qus);
     addQuestion({ id: house._id, qus });
+
+    setQus("");
   };
   return (
     <div>
       <h3 className="text-xl  my-2">Qusestions</h3>
       <form onSubmit={handleAddQuestion} className="mb-4">
         <input
-          name="qus"
+          onChange={(e) => setQus(e.target.value)}
           type="text"
+          value={qus}
           className="focus:outline-blue-500  rounded py-1 px-3 w-1/2"
         />
         <button
@@ -53,11 +58,13 @@ export default function HouseQA({ house }) {
                       <PiArrowBendDownRightFill className="inline" />{" "}
                       {answer?.ans}
                     </p>
-                    <p>at {formateDate(question?.created_at)}</p>
+                    <p className="text-sm">
+                      at {formateDate(question?.created_at)}
+                    </p>
                   </>
                 ))}
               </div>
-              <MakeAnswer question={question} />
+              <MakeAnswer question={question} houseId={house?._id} />
             </>
           ))}
         </div>

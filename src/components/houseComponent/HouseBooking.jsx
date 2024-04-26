@@ -1,18 +1,23 @@
 /* eslint-disable react/prop-types */
-import { useSelector } from 'react-redux';
-import { useAddBookingMutation } from '../../redux/booking/bookingApi';
-import { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { useSelector } from "react-redux";
+import { useAddBookingMutation } from "../../redux/booking/bookingApi";
+import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useParams } from "react-router-dom";
+import Navbar from "../../layouts/Navbar";
+import { useGetSingleHousesQuery } from "../../redux/house/houseApi";
 
-const BookingModal = ({ houseInfo, setHouseInfo }) => {
+const HouseBooking = () => {
+  const params = useParams();
 
+  const { data: houseInfo } = useGetSingleHousesQuery(params?.id);
   const [phoneNumber, setPhoneNumber] = useState();
 
   const { user } = useSelector((state) => state.auth);
 
   const [addBookings, { data, isLoading, isSuccess, isError, error }] =
     useAddBookingMutation();
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem("accessToken");
   const handleBooking = (e) => {
     e.preventDefault();
     const fullName = user?.fullName;
@@ -21,39 +26,40 @@ const BookingModal = ({ houseInfo, setHouseInfo }) => {
       fullName,
       email,
       phoneNumber,
-      house: houseInfo?._id,
+      house:params.id,
       token,
     };
-    console.log({bookingData})
+
     addBookings(bookingData);
   };
   console.log({ data, isLoading, isSuccess, isError, error });
   useEffect(() => {
     if (isLoading) {
-      toast.loading('Loading..', { id: 'addHouse' });
+      toast.loading("Loading..", { id: "addHouse" });
     }
     if (isSuccess) {
-      toast.success(data.message, { id: 'addHouse' });
+      toast.success(data.message, { id: "addHouse" });
     }
     if (isError) {
       console.log(error);
-      toast.error(error?.data?.error, { id: 'addHouse' });
+      toast.error(error?.data?.error, { id: "addHouse" });
     }
   }, [isSuccess, isError, isLoading, error, data]);
 
   return (
     <>
-      <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box ">
+      <Navbar />
+
+      <div className="w-full bg-white flex justify-center pt-20">
+        <div className="w-1/2 bg-white">
           <h3 className="font-bold text-lg">
             Book The House <br />
             <span className="text-orange-500 font-semibold">
-              {houseInfo?.name}
+              {houseInfo?.data?.name}
             </span>
           </h3>
           <form onSubmit={handleBooking}>
-            <div className="my-5 grid-cols-1  my-5 ">
+            <div className="grid-cols-1  my-5 ">
               <div>
                 <label htmlFor="">Name</label>
                 <br />
@@ -86,17 +92,10 @@ const BookingModal = ({ houseInfo, setHouseInfo }) => {
               </div>
             </div>
             <div className="modal-action">
-              <label
-                htmlFor="my_modal_6"
-               
-                className="py-2 px-3 bg-red-100 text-red-500 my-auto rounded-lg"
-              >
-                Close
-              </label>
               <div>
                 <input
                   type="submit"
-                  value={'Add Booking'}
+                  value={"Add Booking"}
                   onClick={handleBooking}
                   className="py-2 text-center px-3 bg-blue-100 text-blue-500 my-auto rounded-lg"
                 />
@@ -109,4 +108,4 @@ const BookingModal = ({ houseInfo, setHouseInfo }) => {
   );
 };
 
-export default BookingModal;
+export default HouseBooking;

@@ -80,6 +80,17 @@ const houseApi = apiSlice.injectEndpoints({
       },
       invalidatesTags: ['HOUSE'],
     }),
+    makeAnswer: builder.mutation({
+      query: ({ houseId, questionId,ans }) => {
+     
+        return {
+          url: `/house/make-answer/${houseId}/${questionId}`,
+          method: 'PATCH',
+         body:{ans}
+        }
+      },
+      invalidatesTags: ['HOUSE'],
+    }),
   }),
 });
 
@@ -90,5 +101,6 @@ export const {
   useEditHouseMutation,
   useGetHousesQuery,
   useGetSingleHousesQuery,
-  useAddQuestionMutation
+  useAddQuestionMutation,
+  useMakeAnswerMutation
 } = houseApi;

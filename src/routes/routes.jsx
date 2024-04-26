@@ -13,6 +13,7 @@ import EditHouse from '../components/OwnerDashboardComponent/EditHouse';
 import MyBookings from '../components/RenterDashboardComponent/MyBookings';
 import HouseDetails from '../components/houseComponent/HouseDetails';
 import Wishlist from '../pages/Wishlist';
+import HouseBooking from '../components/houseComponent/HouseBooking';
 
 
 const routes = createBrowserRouter([
@@ -23,6 +24,10 @@ const routes = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'house-booking/:id',
+        element: <HouseBooking />,
       },
       {
         path: 'house/:id',

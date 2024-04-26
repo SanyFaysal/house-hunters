@@ -67,7 +67,7 @@ const LoginForm = () => {
           onClick={handleLogin}
           className="px-3 py-2 bg-gray-200 duration-500   text-gray-500 font-semibold w-full rounded-lg my-auto"
         >
-          Register
+          Login
         </button>
       </div>
       <div className="mt-3">
