@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import apiSlice from './api/apiSlice';
 import userSlice from './user/userSlice';
-import wishListSlice from './wishlist/wishListSlice';
+import wishListSlice from './wishlist/wishlistSlice';
 
 const store = configureStore({
   reducer: {
