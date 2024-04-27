@@ -71,7 +71,7 @@ const HouseCard = ({ house }) => {
               <h5 className="text-sm font-light">Rent per month </h5>
               <p className="  font-semibold ">{house?.rentPerMonth}</p>
             </div>
-            <div className="flex gap-5">
+            <div className="flex gap-5 mt-1">
               <div>
                 <h5 className="text-sm font-light">Bedroom </h5>
                 <p className=" text-sm font-semibold">{house?.bedrooms}</p>
@@ -79,6 +79,10 @@ const HouseCard = ({ house }) => {
               <div>
                 <h5 className="text-sm font-light">Bathrooms </h5>
                 <p className=" text-sm font-semibold">{house?.bathrooms}</p>
+              </div>
+              <div>
+                <h5 className="text-sm font-light">Available </h5>
+                <p className=" text-sm font-semibold">{house?.availabilityDate}</p>
               </div>
             </div>
           </div>
