@@ -46,7 +46,7 @@ const HouseCard = ({ house }) => {
   return (
     <div className="bg-white  rounded-lg ">
       <div className="  rounded-lg ">
-        <div className="">
+        {/* <div className="">
           <img
             className="w-fill rounded-t-lg"
             src={
@@ -54,7 +54,7 @@ const HouseCard = ({ house }) => {
             }
             alt=""
           />
-        </div>
+        </div> */}
         <div className="col-span- p-4">
           <div className=" grid-cols-4  gap-2">
             {/* <div>
