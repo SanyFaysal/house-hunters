@@ -6,17 +6,21 @@ import { useAddQuestionMutation } from "../../redux/house/houseApi";
 import MakeAnswer from "./MakeAnswer";
 import { formateDate } from "../../utils/formatedDate";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 export default function HouseQA({ house }) {
+  const { user } = useSelector((state) => state.auth);
   const [addQuestion] = useAddQuestionMutation();
   const [qus, setQus] = useState("");
   const handleAddQuestion = (event) => {
     event.preventDefault();
-
-    console.log("id", qus);
-    addQuestion({ id: house._id, qus });
-
-    setQus("");
+    if (user?.email) {
+      addQuestion({ id: house._id, qus });
+      setQus("");
+    } else {
+      toast.error("Please login first!");
+    }
   };
   return (
     <div>
